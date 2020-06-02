@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import sequelize from './db.mjs'
 
-const UserModel = sequelize.define('user',{
+const User = sequelize.define('user',{
     username : {
         type: Sequelize.STRING
     },
@@ -13,4 +13,4 @@ const UserModel = sequelize.define('user',{
     }
 })
 
-export default UserModel
+export default User

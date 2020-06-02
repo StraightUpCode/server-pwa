@@ -3,7 +3,7 @@ import sequelize from './db.mjs'
 import UserModel from './user.mjs'
 
 
-const TodoModel = sequelize.define('todo',{
+const Todo = sequelize.define('todo',{
     localId : {
         type: Sequelize.STRING
     }, 
@@ -21,4 +21,4 @@ const TodoModel = sequelize.define('todo',{
 })
 
 
-export default TodoModel
+export default Todo

@@ -3,6 +3,7 @@ dotenv.config()
 import express from 'express'
 import {AuthRouter, TodoRouter} from './routes/index.mjs'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 const app = express()
 app.use(bodyParser.json())
