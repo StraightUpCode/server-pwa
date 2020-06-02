@@ -6,9 +6,13 @@ import bodyParser from 'body-parser'
 
 const app = express()
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use('/api/todo', TodoRouter)
 app.use('/', AuthRouter)
 
 
-app.listen(process.env.PORT||3000)
+app.listen(process.env.PORT||3000,()=> {
+
+    console.log(`Listening on port ${process.env.PORT||3000}`)
+})
