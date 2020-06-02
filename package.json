@@ -10,6 +10,7 @@
     "sequelize": "^5.21.11"
   },
   "scripts": {
-    "dev": "nodemon index.mjs"
+    "dev": "nodemon index.mjs",
+    "start": "node index.mjs"
   }
 }
