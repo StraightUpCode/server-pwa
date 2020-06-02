@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 dotenv.config()
+
 import Sequelize from 'sequelize'
 
 
@@ -9,14 +10,19 @@ const username= process.env.DB_USER
 const password= process.env.DB_PASS
 console.log(host, database, username, password)
 
+let sequelize
+if(!process.env.DATABASE_URL){
+    sequelize = new Sequelize(
+        database,
+        username,
+        password,
+        {
+            host: host,
+            dialect: 'postgres'
+        })
+}else{
+    sequelize = new Sequelize(process.env.DATABASE_URL)
+}
 
-const sequelize = new Sequelize(
-database,
-username,
-password,
-{
-    host: host,
-    dialect: 'postgres'
-})
 
 export default sequelize
