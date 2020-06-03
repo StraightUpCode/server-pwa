@@ -12,7 +12,7 @@ const Todo = sequelize.define('todo',{
     },
     descripcion: {
         type: Sequelize.STRING
-    }
+    },
     status: {
         type: Sequelize.ENUM ,
         values: ['pendiente', 'realizado']
