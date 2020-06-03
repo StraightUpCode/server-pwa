@@ -10,7 +10,7 @@ import session from 'express-session'
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
-app.use(session())
+app.use(session({secret : 'ES UN SECRETO QUE TU MIRADA Y LA MIA'}))
 app.use(passport.initialize())
 app.use(passport.session())
 
