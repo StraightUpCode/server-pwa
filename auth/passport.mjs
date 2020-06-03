@@ -15,14 +15,26 @@ passport.use(
         })
         console.log('User result', user)
         if(!  user ){
-
+            console.log('No existe el user')
             return done(null,false, 'Wrong Credentials' )
         }
         if(!user.password == password){
+            console.log('Pass mala')
             return done(null, false, 'Wrong Credentials')
         }
+        console.log('Todo chido')
         return done(null, user)
     })
 )
+
+
+passport.serializeUser((user, done) => {
+    done(user.id)
+})
+
+passport.deserializeUser(async (userId,done) => {
+    const user = await UserModel.findByPk(userId)
+    done(null,user)
+})
 
 export default passport

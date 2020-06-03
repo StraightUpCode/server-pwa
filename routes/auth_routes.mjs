@@ -1,13 +1,13 @@
 import express from 'express'
-import passport from 'passport'
+import passport from '../auth/passport.mjs'
 import { UserModel } from '../models/index.mjs'
-const AuthRouter =  express.Router();
+const AuthRouter = express.Router();
 
 AuthRouter.post("/login",
-passport.authenticate('local'),
-(req, res) => {
-  res.redirect('/')
-}
+  passport.authenticate('local',{
+    successRedirect: '/',
+    session: true
+  }),
 );
 
 AuthRouter.post("/register", async (req, res) => {
