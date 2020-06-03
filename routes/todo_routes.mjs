@@ -1,44 +1,43 @@
 import express from 'express'
 import { TodoModel } from '../models/index.mjs'
 import UserModel from '../models/user.mjs';
+import Todo from '../models/todo.mjs';
 
 const TodoRouter = express.Router()
 
-TodoRouter.get("/", async (req, res) => {
+const API_ROUTE = todoId => `/:rawUserId/todos${todoId ? `/${todoId}` : ''}`
+TodoRouter.get(API_ROUTE`/`, async (req, res) => {
     console.log("api");
     // const result =  await TodoModel.all()
     // console.log(result)
     res.send('Todo Api')
     // const result = await Promise.resolve('hola')
-
-
-
-
 });
 
-TodoRouter.get("/:id", async (req, res) => {
-    const { id } = req.params
+TodoRouter.get(API_ROUTE``, async (req, res) => {
+    const { rawUserId } = req.params
     console.log("Get 1");
-    const result = await UserModel.findByPk(parseInt(id))
+    const result = await UserModel.findByPk(parseInt(rawUserId))
     console.log(result);
-    res.send(result) 
+    const todos = await result.getTodos()
+    res.send(todos)
 });
 
-TodoRouter.post("/:id", async (req, res) => {
+TodoRouter.post(API_ROUTE``, async (req, res) => {
     console.log("Router Post");
-    const {id } = req.params
+    const { rawUserId } = req.params
     const newTodo = req.body
     console.log(newTodo)
     if (!newTodo.userId) {
-        newTodo.userId = parseInt(id);
+        newTodo.userId = parseInt(rawUserId);
     }
     console.log(newTodo)
     const result = await TodoModel.create(newTodo);
     res.send(result)
 });
 
-TodoRouter.post("/:rawUserId/:rawTodoId", async (req,res) => {
-    const { rawUserId , rawTodoId} = req.params
+TodoRouter.post(API_ROUTE`:rawTodoId`, async (req, res) => {
+    const { rawUserId, rawTodoId } = req.params
     const updatedTodo = req.body
     const userId = parseInt(rawUserId)
     const todoId = parseInt(rawTodoId)
@@ -47,10 +46,20 @@ TodoRouter.post("/:rawUserId/:rawTodoId", async (req,res) => {
     console.log(todo)
     console.log(updatedTodo)
     const newTodo = todo.update(updatedTodo)
-
-   
-
     res.send(await newTodo)
 });
+
+TodoRouter.delete(API_ROUTE`:rawTodoId`, async (req, res) => {
+    const { rawUserId, rawTodoId } = req.params
+    const todoId = parseInt(rawTodoId)
+    const result = await Todo.destroy({where : {
+        id: todoId
+    }})
+    console.log(result)
+    if(result > 0) { 
+        res.send(`Se borraron ${result} elementos`)
+    }
+
+})
 
 export default TodoRouter;

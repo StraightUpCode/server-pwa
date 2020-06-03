@@ -9,7 +9,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use('/api/todo', TodoRouter)
+app.use('/api', TodoRouter)
 app.use('/', AuthRouter)
 
 
