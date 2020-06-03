@@ -1,13 +1,14 @@
 import express from 'express'
+import passport from 'passport'
 import { UserModel } from '../models/index.mjs'
 const AuthRouter =  express.Router();
 
-AuthRouter.post("/login", async (req, res) => {
-  const userCredentials = req.body
-  console.log("Login");
-//    const user = await 
-//   console.log(user);
-});
+AuthRouter.post("/login",
+passport.authenticate('local'),
+(req, res) => {
+  res.redirect('/')
+}
+);
 
 AuthRouter.post("/register", async (req, res) => {
   console.log("register");
