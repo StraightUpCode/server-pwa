@@ -5,7 +5,7 @@ import UserModel from './user.mjs'
 
 TodoModel.belongsTo(UserModel)
 UserModel.hasMany(TodoModel)
-sequelize.sync()
+sequelize.sync({force: true})
 export {
     sequelize,
     TodoModel,
