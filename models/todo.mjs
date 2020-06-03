@@ -10,9 +10,12 @@ const Todo = sequelize.define('todo',{
     todo : {
         type: Sequelize.STRING
     },
+    descripcion: {
+        type: Sequelize.STRING
+    }
     status: {
         type: Sequelize.ENUM ,
-        values: ['pendiente', 'resuelto']
+        values: ['pendiente', 'realizado']
     },
     endDate : {
         type: Sequelize.DATE,
