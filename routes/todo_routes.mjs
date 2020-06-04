@@ -6,13 +6,17 @@ import Todo from '../models/todo.mjs';
 const TodoRouter = express.Router()
 
 const API_ROUTE = todoId => `/:rawUserId/todos${todoId ? `/${todoId}` : ''}`
-TodoRouter.get(API_ROUTE`/`, async (req, res) => {
-    console.log("api");
+
+//Route Handler get 
+// /api/
+TodoRouter.get(``, async (req, res) => {
+    //console.log("api");
     // const result =  await TodoModel.all()
     // console.log(result)
     res.send('Todo Api')
     // const result = await Promise.resolve('hola')
 });
+
 
 TodoRouter.get(API_ROUTE``, async (req, res) => {
     const { rawUserId } = req.params
