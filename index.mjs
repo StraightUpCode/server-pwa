@@ -13,12 +13,11 @@ app.use(bodyParser.json())
 app.use(session({secret : 'ES UN SECRETO QUE TU MIRADA Y LA MIA'}))
 
 
-app.use('/', AuthRouter)
+app.use('/sesion', AuthRouter)
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/api', TodoRouter)
 app.get('/', (req, res) => {
-    console.log('Loged in')
     res.send('Logged in')
 })
 
