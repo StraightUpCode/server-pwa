@@ -6,6 +6,7 @@ const AuthRouter = express.Router();
 AuthRouter.post("/login",
   passport.authenticate('local',{
     successRedirect: '/',
+    failureRedirect: '/login',
     session: true
   }),
 );
