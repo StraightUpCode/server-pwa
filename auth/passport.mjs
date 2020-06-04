@@ -13,7 +13,6 @@ passport.use(
                 username : username,
             }
         })
-        console.log('User result', user)
         if(!  user ){
             console.log('No existe el user')
             return done(null,false, 'Wrong Credentials' )
@@ -29,11 +28,13 @@ passport.use(
 
 
 passport.serializeUser((user, done) => {
-    done(user.id)
+    console.log('Serialize',user)
+    done(null,user.id)
 })
 
 passport.deserializeUser(async (userId,done) => {
     const user = await UserModel.findByPk(userId)
+    console.log('Deserialize', user)
     done(null,user)
 })
 

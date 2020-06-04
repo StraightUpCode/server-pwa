@@ -5,10 +5,14 @@ const AuthRouter = express.Router();
 
 AuthRouter.post("/login",
   passport.authenticate('local',{
-    successRedirect: '/',
-    failureRedirect: '/login',
+    // sucessRedirect: '/',
     session: true
   }),
+  async(req, res) => {
+    console.log('Response after Passport')
+    console.log(req.session)
+    res.send({user : req.session.passport.user})
+  }
 );
 
 AuthRouter.post("/register", async (req, res) => {
