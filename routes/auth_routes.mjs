@@ -31,8 +31,10 @@ AuthRouter.post("/register", async (req, res) => {
   console.log("register");
   const newUser = req.body;
   console.log(newUser);
-  const result = await UserModel.create(newUser);
-  res.send(result)
+  const {dataValues} = await UserModel.create(newUser);
+  console.log(dataValues)
+  const { password , ...sending}  = dataValues
+  res.send(sending)
 });
 
 AuthRouter.get("/logout", async (ctx) => {
