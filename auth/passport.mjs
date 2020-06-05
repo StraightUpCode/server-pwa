@@ -16,10 +16,6 @@ passport.use(
         })
 
         console.log(user)
-      }catch(e){
-          console.log(e)
-        return done(null,false, 'Wrong Credentials' )
-      }
         if(!  user ){
             console.log('No existe el user')
             return done(null,false, 'Wrong Credentials' )
@@ -30,6 +26,11 @@ passport.use(
         }
         console.log('Todo chido')
         return done(null, user)
+      }catch(e){
+          console.log(e)
+        return done(null,false, 'Wrong Credentials' )
+      }
+      
     })
 )
 
