@@ -11,6 +11,7 @@ console.log(host, database, username, password)
 
 let sequelize
 if(!process.env.DATABASE_URL){
+    console.log()
     sequelize = new Sequelize(
         database,
         username,
@@ -20,6 +21,7 @@ if(!process.env.DATABASE_URL){
             dialect: 'postgres'
         })
 }else{
+    console.log(process.env.DATABASE_URL)
     sequelize = new Sequelize(process.env.DATABASE_URL)
 }
 

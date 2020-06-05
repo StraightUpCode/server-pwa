@@ -14,6 +14,8 @@ passport.use(
                 username : username,
             }
         })
+
+        console.log(user)
       }catch(e){
           console.log(e)
         return done(null,false, 'Wrong Credentials' )
