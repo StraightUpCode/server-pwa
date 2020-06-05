@@ -20,10 +20,17 @@ TodoRouter.get(``, async (req, res) => {
 
 TodoRouter.get(API_ROUTE``, async (req, res) => {
     const { rawUserId } = req.params
+    const { status } = req.query
     console.log("Get 1");
     const result = await UserModel.findByPk(parseInt(rawUserId))
-    console.log(result);
-    const todos = await result.getTodos()
+   // console.log(result);
+   let query = {}
+   if(status) {
+    query.where = {
+        status: status
+    }
+   }
+    const todos = await result.getTodos(query)
     res.send(todos)
 });
 
@@ -61,7 +68,7 @@ TodoRouter.delete(API_ROUTE`:rawTodoId`, async (req, res) => {
     }})
     console.log(result)
     if(result > 0) { 
-        res.send(`Se borraron ${result} elementos`)
+        res.send({message: `Se borraron ${result} elementos`})
     }
 
 })
