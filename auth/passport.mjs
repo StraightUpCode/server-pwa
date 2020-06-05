@@ -8,11 +8,16 @@ passport.use(
     new LocalStrategy(async (username, password, done) => {
         console.log('Username',username)
         console.log('Password',password)
+      try{
         const user = await UserModel.findOne({
             where: {
                 username : username,
             }
         })
+      }catch(e){
+          console.log(e)
+        return done(null,false, 'Wrong Credentials' )
+      }
         if(!  user ){
             console.log('No existe el user')
             return done(null,false, 'Wrong Credentials' )
@@ -33,9 +38,13 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (userId,done) => {
+   try{
     const user = await UserModel.findByPk(userId)
     console.log('Deserialize', user)
     done(null,user)
+   }catch(e){
+       console.log(e)
+   }
 })
 
 export default passport
